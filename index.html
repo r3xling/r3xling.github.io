@@ -123,13 +123,16 @@
 <h1 id="使用_hexo">使用 hexo</h1><h3 id="部署">部署</h3><p>配置 _config.yml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: git@github.com:r3xling/r3xling.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
 <p>即可将 hexo 部署到 github 上</p>
-<p>如果部署过程中报错，可执行一下命令重新部署<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p>
+<p>提示找不到git时<br>需执行（虽然之前已经执行过）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p>然后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
+<p>即可</p>
 <h3 id="发表新文章">发表新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"title"</span></span><br></pre></td></tr></table></figure>
 <p>然后在source/_post 下会生成该md文件，即可使用编辑器编写了</p>
 <p>编写过程中，可以在本地实时查看效果，很是方便</p>
 <p>支持 markdown，不了解的自行 google 吧</p>
 <p>编写完成后，部署还是一样的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
-<h3 id="_config-yml">_config.yml</h3><p><em>备注：</em><br>Hexo简写命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="comment">#new</span></span><br><span class="line">hexo g <span class="comment">#generate</span></span><br><span class="line">hexo s <span class="comment">#server</span></span><br><span class="line">hexo d <span class="comment">#deploy</span></span><br></pre></td></tr></table></figure></p>
+<p>如果部署过程中报错，可执行以下命令重新部署<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p>
+<p><em>备注：</em><br>Hexo简写命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="comment">#new</span></span><br><span class="line">hexo g <span class="comment">#generate</span></span><br><span class="line">hexo s <span class="comment">#server</span></span><br><span class="line">hexo d <span class="comment">#deploy</span></span><br></pre></td></tr></table></figure></p>
 <p>未完待续。。。</p>
 <h1 id="参考资料">参考资料</h1><p><a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/</a><br><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/</a></p>
 
@@ -306,8 +309,8 @@
 	
 	
 	<section class="info">
-		<p> Hello ,I&#39;m xiuling. <br/>
-			This is my blog,believe it or not.</p>
+		<p> Hello ,I&#39;m r3xling. <br/>
+			This is my blog, believe it or not.</p>
 	</section>
 	 
 	<div class="social-font" class="clearfix">
