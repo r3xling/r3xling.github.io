@@ -4,22 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>r3xling&#39;s blog</title>
+    <title>如何使用 hexo+github 搭建个人博客 | r3xling&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="r3xling">
     
 
     
-    <meta name="description" content="总结 感悟">
-<meta property="og:type" content="website">
-<meta property="og:title" content="r3xling's blog">
-<meta property="og:url" content="http://r3xling.github.io/index.html">
+    <meta name="description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用 hexo+github 搭建个人博客">
+<meta property="og:url" content="http://r3xling.github.io/2015/05/23/如何使用hexo-github-搭建个人博客/index.html">
 <meta property="og:site_name" content="r3xling's blog">
-<meta property="og:description" content="总结 感悟">
+<meta property="og:description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留">
+<meta property="og:image" content="http://i.v2ex.co/5bb7J7NT.png">
+<meta property="og:updated_time" content="2015-05-23T07:51:03.537Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="r3xling's blog">
-<meta name="twitter:description" content="总结 感悟">
+<meta name="twitter:title" content="如何使用 hexo+github 搭建个人博客">
+<meta name="twitter:description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留">
 
     
     <link rel="alternative" href="/atom.xml" title="r3xling&#39;s blog" type="application/atom+xml">
@@ -69,12 +71,10 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/2015/05/23/如何使用hexo-github-搭建个人博客/" title="如何使用 hexo+github 搭建个人博客" itemprop="url">如何使用 hexo+github 搭建个人博客</a>
@@ -88,9 +88,16 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <p><img src="http://i.v2ex.co/5bb7J7NT.png" alt="借用图片"></p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_github_windows"><span class="toc-number">2.0.1.</span> <span class="toc-text">安装 github windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_node-js"><span class="toc-number">2.0.2.</span> <span class="toc-text">安装 node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建_Github_Pages"><span class="toc-number">2.0.3.</span> <span class="toc-text">创建 Github Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置_ssh_key"><span class="toc-number">2.0.4.</span> <span class="toc-text">配置 ssh key</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置_hexo"><span class="toc-number">3.</span> <span class="toc-text">配置 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地_clone"><span class="toc-number">3.0.1.</span> <span class="toc-text">本地 clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装、配置_hexo"><span class="toc-number">3.0.2.</span> <span class="toc-text">安装、配置 hexo</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用_hexo"><span class="toc-number">4.</span> <span class="toc-text">使用 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">4.0.1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">4.0.2.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_config-yml"><span class="toc-number">4.0.3.</span> <span class="toc-text">_config.yml</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+		
+		</div>
+		
+		<p><img src="http://i.v2ex.co/5bb7J7NT.png" alt="借用图片"></p>
 <h1 id="前言">前言</h1><p>之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留个备忘，并且希望能坚持写下去。</p>
 <h1 id="准备工作">准备工作</h1><p><em>注意</em>: 本文主要针对 Windows 平台和 Hexo 3.x</p>
 <h3 id="安装_github_windows">安装 github windows</h3><p>主要使用 git bash，如果对git命令不熟悉的也可以使用 git 客户端进行某些操作</p>
@@ -132,14 +139,9 @@
 <h3 id="_config-yml">_config.yml</h3><p><em>备注：</em><br>Hexo简写命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="comment">#new</span></span><br><span class="line">hexo g <span class="comment">#generate</span></span><br><span class="line">hexo s <span class="comment">#server</span></span><br><span class="line">hexo d <span class="comment">#deploy</span></span><br></pre></td></tr></table></figure></p>
 <p>未完待续。。。</p>
 <h1 id="参考资料">参考资料</h1><p><a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/</a><br><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
+  
+	</div>
+		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -157,82 +159,43 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-</div>
+	  <div data-url="http://r3xling.github.io/2015/05/23/如何使用hexo-github-搭建个人博客/" data-title="如何使用 hexo+github 搭建个人博客 | r3xling&#39;s blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
 
 </footer>
 
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/23/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="r3xling" target="_blank" itemprop="author">r3xling</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-23T02:15:08.706Z" itemprop="datePublished"> 发表于 2015-05-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
+   	       
+	</article>
 	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/05/23/hello-world/"  title="Hello World">
+ <strong>下一篇：</strong><br/> 
+ <span>Hello World
+</span>
+</a>
 </div>
 
-</footer>
+</nav>
 
+	
 
-    </article>
-
-
-
-
-
-
-
-</div>
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_github_windows"><span class="toc-number">2.0.1.</span> <span class="toc-text">安装 github windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_node-js"><span class="toc-number">2.0.2.</span> <span class="toc-text">安装 node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建_Github_Pages"><span class="toc-number">2.0.3.</span> <span class="toc-text">创建 Github Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置_ssh_key"><span class="toc-number">2.0.4.</span> <span class="toc-text">配置 ssh key</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置_hexo"><span class="toc-number">3.</span> <span class="toc-text">配置 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地_clone"><span class="toc-number">3.0.1.</span> <span class="toc-text">本地 clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装、配置_hexo"><span class="toc-number">3.0.2.</span> <span class="toc-text">安装、配置 hexo</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用_hexo"><span class="toc-number">4.</span> <span class="toc-text">使用 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">4.0.1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">4.0.2.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#_config-yml"><span class="toc-number">4.0.3.</span> <span class="toc-text">_config.yml</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -381,12 +344,69 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
 
 
 
@@ -447,4 +467,4 @@ $(document).ready(function(){
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
