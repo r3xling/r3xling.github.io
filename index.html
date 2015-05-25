@@ -39,6 +39,10 @@
       
 <div>
 		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="r3xling&#39;s blog" title="r3xling&#39;s blog"/></a>
+			</div>
+			
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="r3xling&#39;s blog">r3xling&#39;s blog</a></h1>
 				<h2 class="blog-motto">something useful</h2>
@@ -91,20 +95,20 @@
     <div class="article-content">
         
         <p><img src="http://i.v2ex.co/5bb7J7NT.png" alt="借用图片"></p>
-<h1 id="前言">前言</h1><p>之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留个备忘，并且希望能坚持写下去。</p>
-<h1 id="准备工作">准备工作</h1><blockquote>
+<h2 id="前言">前言</h2><p>之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留个备忘，并且希望能坚持写下去。</p>
+<h2 id="准备工作">准备工作</h2><blockquote>
 <p><em>注意:</em> 本文针对 Windows 平台和 Hexo 3.1.1</p>
 </blockquote>
-<h2 id="安装_github_windows">安装 github windows</h2><p>主要使用 git bash，如果对git命令不熟悉的也可以使用 git 客户端进行某些操作</p>
+<h3 id="安装_github_windows">安装 github windows</h3><p>主要使用 git bash，如果对git命令不熟悉的也可以使用 git 客户端进行某些操作</p>
 <p><a href="https://windows.github.com/" target="_blank" rel="external">github windows</a></p>
-<h2 id="安装_node-js">安装 node.js</h2><p>因为要使用 npm，比较简单的方法就是安装 node.js</p>
+<h3 id="安装_node-js">安装 node.js</h3><p>因为要使用 npm，比较简单的方法就是安装 node.js</p>
 <p><a href="http://nodejs.org/" target="_blank" rel="external">node.js</a></p>
 <blockquote>
 <p>安装完成后添加Path环境变量，使npm命令生效<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;C:\Program Files\nodejs\node_modules\npm</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="创建_Github_Pages">创建 Github Pages</h2><p>没有github账号的话，需要注册一个，不赘述</p>
+<h3 id="创建_Github_Pages">创建 Github Pages</h3><p>没有github账号的话，需要注册一个，不赘述</p>
 <p>然后创建一个仓库，名字是[yourGithubAccount].github.io</p>
-<h2 id="配置_ssh_key">配置 ssh key</h2><p>使用 git bash 生成public ssh key，以下是最简单的方法</p>
+<h3 id="配置_ssh_key">配置 ssh key</h3><p>使用 git bash 生成public ssh key，以下是最简单的方法</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 <p>C/Documents and Settings/username/.ssh目录下会生成 id_rsa.pub</p>
 <p>将 id_rsa.pub 的内容完全复制到 github Account Setting 里的 ssh key 里即可</p>
@@ -115,8 +119,8 @@
 <p>设置用户信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"r3xling"</span>//用户名</span><br><span class="line">$ git config --global user.email  <span class="string">"xiulingwork@gmail.com"</span>//填写自己的邮箱</span><br></pre></td></tr></table></figure>
 <p>经过以上步骤，本机已成功连接到 github，为部署打下基础。</p>
-<h1 id="配置_hexo">配置 hexo</h1><h2 id="本地_clone">本地 clone</h2><p>创建本地目录，然后使用 git bash 或者客户端 clone 之前创建的仓库（[yourGithubAccount].github.io）</p>
-<h2 id="安装、配置_hexo">安装、配置 hexo</h2><p>进入仓库目录，使用 git bash 安装配置 hexo<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line">$ npm install hexo --save</span><br><span class="line">$ hexo init</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置_hexo">配置 hexo</h2><h3 id="本地_clone">本地 clone</h3><p>创建本地目录，然后使用 git bash 或者客户端 clone 之前创建的仓库（[yourGithubAccount].github.io）</p>
+<h3 id="安装、配置_hexo">安装、配置 hexo</h3><p>进入仓库目录，使用 git bash 安装配置 hexo<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line">$ npm install hexo --save</span><br><span class="line">$ hexo init</span><br></pre></td></tr></table></figure></p>
 <p>安装 hexo 插件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-deployer-heroku --save</span><br><span class="line">npm install hexo-deployer-rsync --save</span><br><span class="line">npm install hexo-deployer-openshift --save</span><br><span class="line">npm install hexo-renderer-marked@<span class="number">0.2</span> --save</span><br><span class="line">npm install hexo-renderer-stylus@<span class="number">0.2</span> --save</span><br><span class="line">npm install hexo-generator-feed@<span class="number">1</span> --save</span><br><span class="line">npm install hexo-generator-sitemap@<span class="number">1</span> --save</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -124,7 +128,7 @@
 </blockquote>
 <p>生成 public 文件夹<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br></pre></td></tr></table></figure></p>
 <p>浏览器输入 localhost:4000 本地查看效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure></p>
-<h1 id="使用_hexo">使用 hexo</h1><h2 id="部署">部署</h2><p>配置 _config.yml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: git@github.com:r3xling/r3xling.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用_hexo">使用 hexo</h2><h3 id="部署">部署</h3><p>配置 _config.yml<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: git@github.com:r3xling/r3xling.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
 <p>即可将 hexo 部署到 github 上</p>
 <blockquote>
@@ -132,7 +136,7 @@
 </blockquote>
 <p>然后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
 <p>即可通过 <a href="http://r3xling.github.io/">http://r3xling.github.io/</a> 查看了</p>
-<h2 id="发表新文章">发表新文章</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"title"</span></span><br></pre></td></tr></table></figure>
+<h3 id="发表新文章">发表新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"title"</span></span><br></pre></td></tr></table></figure>
 <p>然后在source/_post 下会生成该md文件，即可使用编辑器编写了</p>
 <p>编写过程中，可以在本地实时查看效果，很是方便</p>
 <p>支持 markdown，不了解的自行 google 吧</p>
@@ -140,14 +144,14 @@
 <blockquote>
 <p>如果部署过程中报错，可执行以下命令重新部署<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="添加自定义页面">添加自定义页面</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page <span class="string">"about"</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加自定义页面">添加自定义页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page <span class="string">"about"</span></span><br></pre></td></tr></table></figure>
 <p>该命令会生成 source/about/index.md，编辑即可</p>
-<h2 id="插件的升级与卸载">插件的升级与卸载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm update</span><br><span class="line">$ npm uninstall &lt;plugin-name&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="更新_hexo">更新 hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g hexo</span><br></pre></td></tr></table></figure>
+<h3 id="插件的升级与卸载">插件的升级与卸载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm update</span><br><span class="line">$ npm uninstall &lt;plugin-name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="更新_hexo">更新 hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g hexo</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><em>备注：</em><br>Hexo简写命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="comment">#new</span></span><br><span class="line">hexo g <span class="comment">#generate</span></span><br><span class="line">hexo s <span class="comment">#server</span></span><br><span class="line">hexo d <span class="comment">#deploy</span></span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<h1 id="参考资料">参考资料</h1><p><a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/</a><br><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/</a><br><a href="http://fy98.com/2014/03/03/build-blog-with-hexo/" target="_blank" rel="external">http://fy98.com/2014/03/03/build-blog-with-hexo/</a></p>
+<h2 id="参考资料">参考资料</h2><p><a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external">http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/</a><br><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/</a><br><a href="http://fy98.com/2014/03/03/build-blog-with-hexo/" target="_blank" rel="external">http://fy98.com/2014/03/03/build-blog-with-hexo/</a></p>
 
         
         
@@ -290,7 +294,7 @@
         
           <li>
             
-            	<a href="https://xjpro.com" target="_blank" title="xjpro">xjpro</a>
+            	<a href="http://xjpro.com" target="_blank" title="xjpro">xjpro</a>
             
           </li>
         
