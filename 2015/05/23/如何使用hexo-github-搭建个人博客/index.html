@@ -4,27 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>如何使用 hexo+github 搭建个人博客 | r3xling&#39;s blog</title>
+    <title>如何使用 hexo+github 搭建个人博客 | xling&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-    <meta name="author" content="r3xling">
+    <meta name="author" content="xling">
     
 
     
-    <meta name="description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留">
+    <meta name="description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把Hexo 3.1.1 的搭建过程记录一下，是这里自己写的第一篇blog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何使用 hexo+github 搭建个人博客">
-<meta property="og:url" content="http://r3xling.github.io/2015/05/23/如何使用hexo-github-搭建个人博客/index.html">
-<meta property="og:site_name" content="r3xling's blog">
-<meta property="og:description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留">
+<meta property="og:url" content="http://xling.v2xm.com/2015/05/23/如何使用hexo-github-搭建个人博客/index.html">
+<meta property="og:site_name" content="xling's blog">
+<meta property="og:description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把Hexo 3.1.1 的搭建过程记录一下，是这里自己写的第一篇blog">
 <meta property="og:image" content="http://i.v2ex.co/5bb7J7NT.png">
-<meta property="og:updated_time" content="2015-05-25T01:23:42.097Z">
+<meta property="og:updated_time" content="2015-05-25T11:55:30.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用 hexo+github 搭建个人博客">
-<meta name="twitter:description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留">
+<meta name="twitter:description" content="前言之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把Hexo 3.1.1 的搭建过程记录一下，是这里自己写的第一篇blog">
 
     
-    <link rel="alternative" href="/atom.xml" title="r3xling&#39;s blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="xling&#39;s blog" type="application/atom+xml">
     
     
     <link rel="icon" href="/img/favicon.ico">
@@ -42,11 +42,11 @@
 <div>
 		
 			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="r3xling&#39;s blog" title="r3xling&#39;s blog"/></a>
+				<a href="/"><img src="/img/logo.png" alt="xling&#39;s blog" title="xling&#39;s blog"/></a>
 			</div>
 			
 			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="r3xling&#39;s blog">r3xling&#39;s blog</a></h1>
+				<h1 class="site-name"><a href="/" title="xling&#39;s blog">xling&#39;s blog</a></h1>
 				<h2 class="blog-motto">something useful</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
@@ -66,7 +66,7 @@
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
 						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:r3xling.github.io">
+						<input type="hidden" name="q" value="site:xling.v2xm.com">
 					</form>
 					
 					</li>
@@ -85,7 +85,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="/about" title="r3xling" target="_blank" itemprop="author">r3xling</a>
+		<a href="/about" title="xling" target="_blank" itemprop="author">xling</a>
 		
   <p class="article-time">
     <time datetime="2015-05-23T03:27:27.000Z" itemprop="datePublished"> 发表于 2015-05-23</time>
@@ -97,12 +97,12 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_github_windows"><span class="toc-number">2.1.</span> <span class="toc-text">安装 github windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_node-js"><span class="toc-number">2.2.</span> <span class="toc-text">安装 node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建_Github_Pages"><span class="toc-number">2.3.</span> <span class="toc-text">创建 Github Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置_ssh_key"><span class="toc-number">2.4.</span> <span class="toc-text">配置 ssh key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置_hexo"><span class="toc-number">3.</span> <span class="toc-text">配置 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地_clone"><span class="toc-number">3.1.</span> <span class="toc-text">本地 clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装、配置_hexo"><span class="toc-number">3.2.</span> <span class="toc-text">安装、配置 hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_hexo"><span class="toc-number">4.</span> <span class="toc-text">使用 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">4.1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">4.2.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加自定义页面"><span class="toc-number">4.3.</span> <span class="toc-text">添加自定义页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插件的升级与卸载"><span class="toc-number">4.4.</span> <span class="toc-text">插件的升级与卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新_hexo"><span class="toc-number">4.5.</span> <span class="toc-text">更新 hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_github_windows"><span class="toc-number">2.1.</span> <span class="toc-text">安装 github windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_node-js"><span class="toc-number">2.2.</span> <span class="toc-text">安装 node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建_Github_Pages"><span class="toc-number">2.3.</span> <span class="toc-text">创建 Github Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置_ssh_key"><span class="toc-number">2.4.</span> <span class="toc-text">配置 ssh key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置_hexo"><span class="toc-number">3.</span> <span class="toc-text">配置 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地_clone"><span class="toc-number">3.1.</span> <span class="toc-text">本地 clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装、配置_hexo"><span class="toc-number">3.2.</span> <span class="toc-text">安装、配置 hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_hexo"><span class="toc-number">4.</span> <span class="toc-text">使用 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">4.1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">4.2.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加自定义页面"><span class="toc-number">4.3.</span> <span class="toc-text">添加自定义页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插件的升级与卸载"><span class="toc-number">4.4.</span> <span class="toc-text">插件的升级与卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新_hexo"><span class="toc-number">4.5.</span> <span class="toc-text">更新 hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定自定义域名"><span class="toc-number">4.6.</span> <span class="toc-text">绑定自定义域名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
 		
 		</div>
 		
 		<p><img src="http://i.v2ex.co/5bb7J7NT.png" alt="借用图片"></p>
-<h2 id="前言">前言</h2><p>之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把搭建的过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留个备忘，并且希望能坚持写下去。</p>
+<h2 id="前言">前言</h2><p>之前一直使用像 wordpress、typecho 之类的搭建个人博客，或者展示摄影作品，很早之前就听说很多人开始用github pages 来搭建，但是简单了解了jeckll之后，因为麻烦就搁置了。听说 hexo 相对简单，今天有时间就来试试，发现 hexo 确实不错。因为网上很多教程都是针对 hexo 老的版本写的，就把Hexo 3.1.1 的搭建过程记录一下，是这里自己写的第一篇blog，算是个纪念吧，也是留个备忘，并且希望能坚持写下去。</p>
 <h2 id="准备工作">准备工作</h2><blockquote>
 <p><em>注意:</em> 本文针对 Windows 平台和 Hexo 3.1.1</p>
 </blockquote>
@@ -142,7 +142,7 @@
 <p>提示找不到git时<br>需执行（虽然之前已经执行过）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p>然后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
-<p>即可通过 <a href="http://r3xling.github.io/">http://r3xling.github.io/</a> 查看了</p>
+<p>即可通过 <a href="http://r3xling.github.io/" target="_blank" rel="external">http://r3xling.github.io/</a> 查看了</p>
 <h3 id="发表新文章">发表新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"title"</span></span><br></pre></td></tr></table></figure>
 <p>然后在source/_post 下会生成该md文件，即可使用编辑器编写了</p>
 <p>编写过程中，可以在本地实时查看效果，很是方便</p>
@@ -155,6 +155,7 @@
 <p>该命令会生成 source/about/index.md，编辑即可</p>
 <h3 id="插件的升级与卸载">插件的升级与卸载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm update</span><br><span class="line">$ npm uninstall &lt;plugin-name&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="更新_hexo">更新 hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -g hexo</span><br></pre></td></tr></table></figure>
+<h3 id="绑定自定义域名">绑定自定义域名</h3><p>在/source/ 目录下新建内容为自定义域名的CNAME文件，部署即可（域名设置略）</p>
 <blockquote>
 <p><em>备注：</em><br>Hexo简写命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n <span class="comment">#new</span></span><br><span class="line">hexo g <span class="comment">#generate</span></span><br><span class="line">hexo s <span class="comment">#server</span></span><br><span class="line">hexo d <span class="comment">#deploy</span></span><br></pre></td></tr></table></figure></p>
 </blockquote>
@@ -181,7 +182,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://r3xling.github.io/2015/05/23/如何使用hexo-github-搭建个人博客/" data-title="如何使用 hexo+github 搭建个人博客 | r3xling&#39;s blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://xling.v2xm.com/2015/05/23/如何使用hexo-github-搭建个人博客/" data-title="如何使用 hexo+github 搭建个人博客 | xling&#39;s blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -194,14 +195,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/25/hello-world/" title="Hello World">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Hello World</span>
+
+<div class="next">
+<a href="/2015/05/23/hello-world/"  title="Hello World">
+ <strong>下一篇：</strong><br/> 
+ <span>Hello World
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -213,7 +214,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_github_windows"><span class="toc-number">2.1.</span> <span class="toc-text">安装 github windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_node-js"><span class="toc-number">2.2.</span> <span class="toc-text">安装 node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建_Github_Pages"><span class="toc-number">2.3.</span> <span class="toc-text">创建 Github Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置_ssh_key"><span class="toc-number">2.4.</span> <span class="toc-text">配置 ssh key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置_hexo"><span class="toc-number">3.</span> <span class="toc-text">配置 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地_clone"><span class="toc-number">3.1.</span> <span class="toc-text">本地 clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装、配置_hexo"><span class="toc-number">3.2.</span> <span class="toc-text">安装、配置 hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_hexo"><span class="toc-number">4.</span> <span class="toc-text">使用 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">4.1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">4.2.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加自定义页面"><span class="toc-number">4.3.</span> <span class="toc-text">添加自定义页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插件的升级与卸载"><span class="toc-number">4.4.</span> <span class="toc-text">插件的升级与卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新_hexo"><span class="toc-number">4.5.</span> <span class="toc-text">更新 hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_github_windows"><span class="toc-number">2.1.</span> <span class="toc-text">安装 github windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装_node-js"><span class="toc-number">2.2.</span> <span class="toc-text">安装 node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建_Github_Pages"><span class="toc-number">2.3.</span> <span class="toc-text">创建 Github Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置_ssh_key"><span class="toc-number">2.4.</span> <span class="toc-text">配置 ssh key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置_hexo"><span class="toc-number">3.</span> <span class="toc-text">配置 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地_clone"><span class="toc-number">3.1.</span> <span class="toc-text">本地 clone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装、配置_hexo"><span class="toc-number">3.2.</span> <span class="toc-text">安装、配置 hexo</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_hexo"><span class="toc-number">4.</span> <span class="toc-text">使用 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#部署"><span class="toc-number">4.1.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发表新文章"><span class="toc-number">4.2.</span> <span class="toc-text">发表新文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加自定义页面"><span class="toc-number">4.3.</span> <span class="toc-text">添加自定义页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插件的升级与卸载"><span class="toc-number">4.4.</span> <span class="toc-text">插件的升级与卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新_hexo"><span class="toc-number">4.5.</span> <span class="toc-text">更新 hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定自定义域名"><span class="toc-number">4.6.</span> <span class="toc-text">绑定自定义域名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
  
   </div>
 
@@ -240,7 +241,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
 			
 		
 			
@@ -286,7 +287,7 @@
 	
 	
 	<section class="info">
-		<p> Hello ,I&#39;m r3xling. <br/>
+		<p> Hello ,I&#39;m xling. <br/>
 			This is my blog, believe it or not.</p>
 	</section>
 	 
@@ -312,7 +313,7 @@
 		<p class="copyright">
 		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
 		
-		<a href="/about" target="_blank" title="r3xling">r3xling</a>
+		<a href="/about" target="_blank" title="xling">xling</a>
 		
 		
 		</p>
