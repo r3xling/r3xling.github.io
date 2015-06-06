@@ -81,6 +81,82 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/06/06/Using-ssl-with-nginx-on-debian-8/" title="Using ssl with nginx on debian 8" itemprop="url">Using ssl with nginx on debian 8</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="xling" target="_blank" itemprop="author">xling</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-06T02:42:03.000Z" itemprop="datePublished"> 发表于 2015-06-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="前言">前言</h2><p>互联网金融、电子商务非常火爆，在网络上跟钱打交道，必定要小心，当然不光是这类网站，可能是人们的安全意识增强了，现在越来越多的网站开始使用 https，今天我也来试用一把。<br>使用 https，首先要用 ssl 证书，各个等级的证书价格相差很大，当然也有免费的，不了解的还请自行 google。这里使用的证书是免费申请的。</p>
+<blockquote>
+<p>提示</p>
+<ul>
+<li>一个证书很可能只能给一个域名使用，也就是说，申请了一个域名的证书，但其子域名可能无法使用</li>
+<li>https 默认使用 443 端口，如果有其他服务占用了此端口，需要先暂停此服务或改其他端口</li>
+</ul>
+</blockquote>
+<h2 id="正文">正文</h2><h3 id="检测是否已安装http_ssl_module">检测是否已安装http_ssl_module</h3><p>已安装nginx，检测方式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>&gt;&amp;<span class="number">1</span> nginx -V | tr <span class="string">' '</span> <span class="string">'\n'</span>|grep ssl</span><br></pre></td></tr></table></figure></p>
+<p>显示 <code>--with-http_ssl_module</code> ，说明已默认安装</p>
+<h3 id="创建_ssl_相关文件目录，并将申请的_crt_和_key_文件复制到此目录，控制权限">创建 ssl 相关文件目录，并将申请的 crt 和 key 文件复制到此目录，控制权限</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /srv/ssl/</span><br><span class="line">chmod <span class="number">400</span> /srv/ssl/example.com.key｛crt｝</span><br></pre></td></tr></table></figure>
+<h3 id="创建并配置_/etc/nginx/sites-available/example-com,_使_http、https_都可用">创建并配置 /etc/nginx/sites-available/example.com, 使 http、https 都可用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">        listen <span class="number">80</span>;</span><br><span class="line"></span><br><span class="line">        server_name example.com;</span><br><span class="line"></span><br><span class="line">        access_<span class="built_in">log</span> /srv/www/example.com/logs/access.log;</span><br><span class="line"></span><br><span class="line">        error_<span class="built_in">log</span> /srv/www/example.com/logs/error.log;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line"></span><br><span class="line">                root    /srv/www/example.com/public_html;</span><br><span class="line"></span><br><span class="line">                index   index.html index.htm index.php;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location ~ .*\.(jpg|png|jpeg|gif|cur)$ &#123;</span><br><span class="line"></span><br><span class="line">                root    /srv/www/example.com/public_html;</span><br><span class="line"></span><br><span class="line">                expires <span class="number">14</span>d;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">        listen <span class="number">443</span>;</span><br><span class="line"></span><br><span class="line">        server_name example.com;</span><br><span class="line"></span><br><span class="line">        ssl on;</span><br><span class="line"></span><br><span class="line">        ssl_certificate /srv/ssl/example.com.crt;</span><br><span class="line"></span><br><span class="line">        ssl_certificate_key /srv/ssl/example.com.key;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        access_<span class="built_in">log</span> /srv/www/example.com/logs/access.log;</span><br><span class="line"></span><br><span class="line">        error_<span class="built_in">log</span> /srv/www/example.com/logs/error.log;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line"></span><br><span class="line">                root    /srv/www/example.com/public_html;</span><br><span class="line"></span><br><span class="line">                index   index.html index.htm index.php;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location ~ .*\.(jpg|png|jpeg|gif|cur)$ &#123;</span><br><span class="line"></span><br><span class="line">                root    /srv/www/example.com/public_html;</span><br><span class="line"></span><br><span class="line">                expires <span class="number">14</span>d;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location ~ .*\.(js|css)?$ &#123;</span><br><span class="line"></span><br><span class="line">                root    /srv/www/example.com/public_html;</span><br><span class="line"></span><br><span class="line">                expires <span class="number">1</span>d;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="enable_the_site">enable the site</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln <span class="operator">-s</span> /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com</span><br><span class="line">/etc/init.d/nginx restart</span><br></pre></td></tr></table></figure>
+<h3 id="测试">测试</h3><p>如果没有任何错误，在根目录创建index.html/index.php等，随便输出打印什么，<br>然后浏览 <code>http://example.com</code>、<code>https://example.com</code> 都能访问了</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/ssl/">ssl</a>►<a class="article-category-link" href="/categories/ssl/nginx/">nginx</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/debian/">debian</a><a href="/tags/nginx/">nginx</a><a href="/tags/ssl/">ssl</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/06/06/Using-ssl-with-nginx-on-debian-8/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/06/Using-ssl-with-nginx-on-debian-8/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/23/如何使用hexo-github-搭建个人博客/" title="如何使用 hexo+github 搭建个人博客" itemprop="url">如何使用 hexo+github 搭建个人博客</a>
   </h1>
   <p class="article-author">By
@@ -279,6 +355,14 @@
 			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
 		  
 		
+		  
+			<li><a href="/categories/ssl/nginx/" title="nginx">nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/ssl/" title="ssl">ssl<sup>1</sup></a></li>
+		  
+		
 		</ul>
 </div>
 
@@ -294,6 +378,18 @@
 		
 			
 				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ssl/" title="ssl">ssl<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nginx/" title="nginx">nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/debian/" title="debian">debian<sup>1</sup></a></li>
 			
 		
 		</ul>
