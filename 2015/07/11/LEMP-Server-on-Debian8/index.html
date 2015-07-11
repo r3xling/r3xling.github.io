@@ -1,0 +1,521 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>LEMP Server on Debian8 | xling&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="xling">
+    
+
+    
+    <meta name="description" content="前言一直是使用 apache 做 server，而没有亲自从头开始使用 nginx，简单看了下文档，开始试用，这一篇主要讲简单配置，有什么不妥之处，还请指正。
+需要安装什么？
+Nginx 不支持对外部程序的直接调用或者解析，所有的外部程序（包括PHP）必须通过 FastCGI 接口来调用。spawn-fcgi 与 PHP-FPM 是支持 PHP 的两个 FastCGI 进程管理器。相对 Spawn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LEMP Server on Debian8">
+<meta property="og:url" content="http://xling.v2xm.com/2015/07/11/LEMP-Server-on-Debian8/index.html">
+<meta property="og:site_name" content="xling's blog">
+<meta property="og:description" content="前言一直是使用 apache 做 server，而没有亲自从头开始使用 nginx，简单看了下文档，开始试用，这一篇主要讲简单配置，有什么不妥之处，还请指正。
+需要安装什么？
+Nginx 不支持对外部程序的直接调用或者解析，所有的外部程序（包括PHP）必须通过 FastCGI 接口来调用。spawn-fcgi 与 PHP-FPM 是支持 PHP 的两个 FastCGI 进程管理器。相对 Spawn">
+<meta property="og:updated_time" content="2015-07-11T09:47:51.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LEMP Server on Debian8">
+<meta name="twitter:description" content="前言一直是使用 apache 做 server，而没有亲自从头开始使用 nginx，简单看了下文档，开始试用，这一篇主要讲简单配置，有什么不妥之处，还请指正。
+需要安装什么？
+Nginx 不支持对外部程序的直接调用或者解析，所有的外部程序（包括PHP）必须通过 FastCGI 接口来调用。spawn-fcgi 与 PHP-FPM 是支持 PHP 的两个 FastCGI 进程管理器。相对 Spawn">
+
+    
+    <link rel="alternative" href="/atom.xml" title="xling&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="xling&#39;s blog" title="xling&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="xling&#39;s blog">xling&#39;s blog</a></h1>
+				<h2 class="blog-motto">something useful</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:xling.v2xm.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/11/LEMP-Server-on-Debian8/" title="LEMP Server on Debian8" itemprop="url">LEMP Server on Debian8</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="xling" target="_blank" itemprop="author">xling</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-11T08:04:02.000Z" itemprop="datePublished"> 发表于 2015-07-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要安装什么？"><span class="toc-number">2.</span> <span class="toc-text">需要安装什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于php-fpm"><span class="toc-number">4.</span> <span class="toc-text">关于php-fpm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="前言">前言</h3><p>一直是使用 apache 做 server，而没有亲自从头开始使用 nginx，简单看了下文档，开始试用，这一篇主要讲简单配置，有什么不妥之处，还请指正。</p>
+<h3 id="需要安装什么？">需要安装什么？</h3><blockquote>
+<p>Nginx 不支持对外部程序的直接调用或者解析，所有的外部程序（包括PHP）必须通过 FastCGI 接口来调用。<br>spawn-fcgi 与 PHP-FPM 是支持 PHP 的两个 FastCGI 进程管理器。<br>相对 Spawn-FCGI，PHP-FPM 在 CPU 和内存方面的控制都更胜一筹，而且前者很容易崩溃，必须用 crontab 进行监控，而 PHP-FPM 则没有这种烦恼。</p>
+</blockquote>
+<p>本次是在虚拟机测试的，该虚拟机之前已安装好 LAMP，所以需关掉 apache ，然后安装 nginx 和 php-fpm。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install nginx php5-fpm</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置">配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old</span><br><span class="line">vim /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
+<p>内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">80</span> default_server;</span><br><span class="line">    listen [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">    root /var/www/html;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Add index.php to the list if you are using PHP</span></span><br><span class="line">    index index.php index.html index.htm ;</span><br><span class="line"></span><br><span class="line">    server_name test.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line">        <span class="comment"># as directory, then fall back to displaying a 404.</span></span><br><span class="line">        try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span> = <span class="number">404</span>;</span><br><span class="line">        fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ok，可以测试了，就是这么简单。</p>
+<h3 id="关于php-fpm">关于php-fpm</h3><p>其中，有资料上用了<code>fastcgi_pass 127.0.0.1:9000;</code>，提示： If you’re using unix socket change fastcgi_pass to: <code>fastcgi_pass unix:/var/run/php5-fpm.sock;</code></p>
+<p>而我测试的时候却不能用前者，这是什么原因呢？隐约中感觉应该是哪里可配置的。<br>果不出所料，在 <code>/etc/php5/fpm/pool.d/www.conf</code> 这个配置文件里找到了以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">; The address on <span class="built_in">which</span> to accept FastCGI requests.</span><br><span class="line">; Valid syntaxes are:</span><br><span class="line">;   <span class="string">'ip.add.re.ss:port'</span>    - to listen on a TCP socket to a specific IPv4 address on</span><br><span class="line">;                            a specific port;</span><br><span class="line">;   <span class="string">'[ip:6:addr:ess]:port'</span> - to listen on a TCP socket to a specific IPv6 address on</span><br><span class="line">;                            a specific port;</span><br><span class="line">;   <span class="string">'port'</span>                 - to listen on a TCP socket to all IPv4 addresses on a</span><br><span class="line">;                            specific port;</span><br><span class="line">;   <span class="string">'[::]:port'</span>            - to listen on a TCP socket to all addresses</span><br><span class="line">;                            (IPv6 and IPv4-mapped) on a specific port;</span><br><span class="line">;   <span class="string">'/path/to/unix/socket'</span> - to listen on a unix socket.</span><br><span class="line">; Note: This value is mandatory.</span><br><span class="line">listen = /var/run/php5-fpm.sock</span><br></pre></td></tr></table></figure>
+<p>php-fpm 默认设置是监听 unix socket，只要改 listen 即可切换 <code>listen = 127.0.0.1:9000</code> 另一种方式,修改了php-fpm配置，不要忘了重启 <code>service php-fpm restart</code>。</p>
+<p>tcp socket 是走网络传输的，而 unix socket 是发生在系统内核里的，所以使用 unix socket 性能更好些。</p>
+<p>基本配置结束。</p>
+<h3 id="参考资料">参考资料</h3><p><a href="https://www.atlantic.net/community/howto/install-lemp-on-debian-8/" target="_blank" rel="external">https://www.atlantic.net/community/howto/install-lemp-on-debian-8/</a><br><a href="http://wiki.tankywoo.com/tool/fastcgi.html" target="_blank" rel="external">http://wiki.tankywoo.com/tool/fastcgi.html</a><br><a href="http://blog.linuxeye.com/364.html" target="_blank" rel="external">http://blog.linuxeye.com/364.html</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/nginx/">nginx</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/nginx/">nginx</a><a href="/tags/php-fpm/">php-fpm</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://xling.v2xm.com/2015/07/11/LEMP-Server-on-Debian8/" data-title="LEMP Server on Debian8 | xling&#39;s blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/07/09/VirtualBox-共享文件夹/"  title="VirtualBox 共享文件夹">
+ <strong>下一篇：</strong><br/> 
+ <span>VirtualBox 共享文件夹
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/07/11/LEMP-Server-on-Debian8/" data-title="LEMP Server on Debian8" data-url="http://xling.v2xm.com/2015/07/11/LEMP-Server-on-Debian8/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要安装什么？"><span class="toc-number">2.</span> <span class="toc-text">需要安装什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于php-fpm"><span class="toc-number">4.</span> <span class="toc-text">关于php-fpm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/VirtualBox/" title="VirtualBox">VirtualBox<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/php/array/" title="array">array<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/ssl/nginx/" title="nginx">nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/nginx/" title="nginx">nginx<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/php/" title="php">php<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/ssl/" title="ssl">ssl<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nginx/" title="nginx">nginx<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/github/" title="github">github<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/array/" title="array">array<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/VirtualBox/" title="VirtualBox">VirtualBox<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ssl/" title="ssl">ssl<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/debian/" title="debian">debian<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php-fpm/" title="php-fpm">php-fpm<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://xjpro.com" target="_blank" title="xjpro">xjpro</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.v2xm.com" target="_blank" title="Jack&#39;s Blog">Jack&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m xling. <br/>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/r3xling" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:r3xling@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="xling">xling</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"xling"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

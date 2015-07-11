@@ -81,6 +81,83 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/11/LEMP-Server-on-Debian8/" title="LEMP Server on Debian8" itemprop="url">LEMP Server on Debian8</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="xling" target="_blank" itemprop="author">xling</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-11T08:04:02.000Z" itemprop="datePublished"> 发表于 2015-07-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="前言">前言</h3><p>一直是使用 apache 做 server，而没有亲自从头开始使用 nginx，简单看了下文档，开始试用，这一篇主要讲简单配置，有什么不妥之处，还请指正。</p>
+<h3 id="需要安装什么？">需要安装什么？</h3><blockquote>
+<p>Nginx 不支持对外部程序的直接调用或者解析，所有的外部程序（包括PHP）必须通过 FastCGI 接口来调用。<br>spawn-fcgi 与 PHP-FPM 是支持 PHP 的两个 FastCGI 进程管理器。<br>相对 Spawn-FCGI，PHP-FPM 在 CPU 和内存方面的控制都更胜一筹，而且前者很容易崩溃，必须用 crontab 进行监控，而 PHP-FPM 则没有这种烦恼。</p>
+</blockquote>
+<p>本次是在虚拟机测试的，该虚拟机之前已安装好 LAMP，所以需关掉 apache ，然后安装 nginx 和 php-fpm。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install nginx php5-fpm</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置">配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.old</span><br><span class="line">vim /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
+<p>内容如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen <span class="number">80</span> default_server;</span><br><span class="line">    listen [::]:<span class="number">80</span> default_server;</span><br><span class="line"></span><br><span class="line">    root /var/www/html;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Add index.php to the list if you are using PHP</span></span><br><span class="line">    index index.php index.html index.htm ;</span><br><span class="line"></span><br><span class="line">    server_name test.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line">        <span class="comment"># as directory, then fall back to displaying a 404.</span></span><br><span class="line">        try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span> = <span class="number">404</span>;</span><br><span class="line">        fastcgi_pass unix:/var/run/php5-fpm.sock;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ok，可以测试了，就是这么简单。</p>
+<h3 id="关于php-fpm">关于php-fpm</h3><p>其中，有资料上用了<code>fastcgi_pass 127.0.0.1:9000;</code>，提示： If you’re using unix socket change fastcgi_pass to: <code>fastcgi_pass unix:/var/run/php5-fpm.sock;</code></p>
+<p>而我测试的时候却不能用前者，这是什么原因呢？隐约中感觉应该是哪里可配置的。<br>果不出所料，在 <code>/etc/php5/fpm/pool.d/www.conf</code> 这个配置文件里找到了以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">; The address on <span class="built_in">which</span> to accept FastCGI requests.</span><br><span class="line">; Valid syntaxes are:</span><br><span class="line">;   <span class="string">'ip.add.re.ss:port'</span>    - to listen on a TCP socket to a specific IPv4 address on</span><br><span class="line">;                            a specific port;</span><br><span class="line">;   <span class="string">'[ip:6:addr:ess]:port'</span> - to listen on a TCP socket to a specific IPv6 address on</span><br><span class="line">;                            a specific port;</span><br><span class="line">;   <span class="string">'port'</span>                 - to listen on a TCP socket to all IPv4 addresses on a</span><br><span class="line">;                            specific port;</span><br><span class="line">;   <span class="string">'[::]:port'</span>            - to listen on a TCP socket to all addresses</span><br><span class="line">;                            (IPv6 and IPv4-mapped) on a specific port;</span><br><span class="line">;   <span class="string">'/path/to/unix/socket'</span> - to listen on a unix socket.</span><br><span class="line">; Note: This value is mandatory.</span><br><span class="line">listen = /var/run/php5-fpm.sock</span><br></pre></td></tr></table></figure>
+<p>php-fpm 默认设置是监听 unix socket，只要改 listen 即可切换 <code>listen = 127.0.0.1:9000</code> 另一种方式,修改了php-fpm配置，不要忘了重启 <code>service php-fpm restart</code>。</p>
+<p>tcp socket 是走网络传输的，而 unix socket 是发生在系统内核里的，所以使用 unix socket 性能更好些。</p>
+<p>基本配置结束。</p>
+<h3 id="参考资料">参考资料</h3><p><a href="https://www.atlantic.net/community/howto/install-lemp-on-debian-8/" target="_blank" rel="external">https://www.atlantic.net/community/howto/install-lemp-on-debian-8/</a><br><a href="http://wiki.tankywoo.com/tool/fastcgi.html" target="_blank" rel="external">http://wiki.tankywoo.com/tool/fastcgi.html</a><br><a href="http://blog.linuxeye.com/364.html" target="_blank" rel="external">http://blog.linuxeye.com/364.html</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/nginx/">nginx</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/linux/">linux</a><a href="/tags/nginx/">nginx</a><a href="/tags/php-fpm/">php-fpm</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/11/LEMP-Server-on-Debian8/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/11/LEMP-Server-on-Debian8/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/09/VirtualBox-共享文件夹/" title="VirtualBox 共享文件夹" itemprop="url">VirtualBox 共享文件夹</a>
   </h1>
   <p class="article-author">By
@@ -507,6 +584,10 @@
 		  
 		
 		  
+			<li><a href="/categories/nginx/" title="nginx">nginx<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/php/" title="php">php<sup>1</sup></a></li>
 		  
 		
@@ -525,6 +606,10 @@
 		
 			
 				<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nginx/" title="nginx">nginx<sup>2</sup></a></li>
 			
 		
 			
@@ -548,11 +633,15 @@
 			
 		
 			
-				<li><a href="/tags/nginx/" title="nginx">nginx<sup>1</sup></a></li>
+				<li><a href="/tags/debian/" title="debian">debian<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/debian/" title="debian">debian<sup>1</sup></a></li>
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php-fpm/" title="php-fpm">php-fpm<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -601,7 +690,7 @@
 	<div class="social-font" class="clearfix">
 		
 		
-		<a href="https://github.com/https://github.com/r3xling" target="_blank" class="icon-github" title="github"></a>
+		<a href="https://github.com/r3xling" target="_blank" class="icon-github" title="github"></a>
 		
 		
 		
